@@ -169,6 +169,7 @@ namespace FabBots {
     //% weight=20
     //% blockId=read_Patrol block="Read |%patrol line tracking sensor"
     //% patrol.fieldEditor="gridpicker" patrol.fieldOptions.columns=2 
+    //% subcategory="Sensors"
     export function readPatrol(patrol: IRs): number {
         if (patrol == IRs.Left) {
             return pins.digitalReadPin(DigitalPin.P13)
@@ -184,6 +185,7 @@ namespace FabBots {
      */
     //% weight=2
     //% blockId=kb_event block="on|%value line tracking sensor|%vi"
+    //% subcategory="Sensors"
     export function ltEvent(value: IRs, vi: Voltage, a: Action) {
          let state = value + vi;
     }
