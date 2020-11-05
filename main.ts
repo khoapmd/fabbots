@@ -219,8 +219,8 @@ namespace FabBots {
             let time: number = input.runningTime()
             while (true) {
                 serial_str += serial.readString()
-                if (serial_str.includes("WIFI")) {
-                    //wifi_connected = true
+                if (serial_str.includes("OK")) {
+                    blynk_connected = true
                     break
                 } 
                 if (input.runningTime() - time > 10) break
@@ -248,6 +248,7 @@ namespace FabBots {
     //% block="Blynk connected ?"
     //% subcategory="Blynk"
     export function isBlynkConnected() {
+        sendString("Blynk")
         waitResponse()
         return blynk_connected
     }
