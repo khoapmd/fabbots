@@ -251,6 +251,7 @@ namespace FabBots {
     export function isBlynkConnected() {
         sendString("isConnected")
         waitResponse()
+        basic.pause(2000)
         return blynk_connected
     }
 }
