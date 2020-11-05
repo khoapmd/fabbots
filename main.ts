@@ -75,8 +75,13 @@ namespace FabBots {
     */
     //% block="Initial FabBots"
     export function initFabbots() {
-      let sendText = "Init" 
-      sendString(sendText, 100) // connect to website server
+        serial.redirect(
+            SerialPin.P0,
+            SerialPin.P1,
+            BaudRate.BaudRate115200
+        )
+      //let sendText = "Init" 
+      //sendString(sendText, 100) // connect to website server
     }
 
     // wait for certain response from Nano
