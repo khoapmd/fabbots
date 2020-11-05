@@ -86,7 +86,7 @@ namespace FabBots {
      * Read ultrasonic sensor.
      */
 
-    //% blockId=ultrasonic_sensor block="read ultrasonic sensor |%unit "
+    //% blockId=ultrasonic_sensor block="Read ultrasonic sensor |%unit "
     //% weight=95
     export function Ultrasonic(unit: PingUnit, maxCmDistance = 500): number {
         let d
@@ -164,7 +164,7 @@ namespace FabBots {
      */
 
     //% weight=20
-    //% blockId=read_Patrol block="read |%patrol line tracking sensor"
+    //% blockId=read_Patrol block="Read |%patrol line tracking sensor"
     //% patrol.fieldEditor="gridpicker" patrol.fieldOptions.columns=2 
     export function readPatrol(patrol: IRs): number {
         if (patrol == IRs.Left) {
