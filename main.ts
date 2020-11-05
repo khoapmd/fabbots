@@ -133,6 +133,7 @@ namespace FabBots {
     //% weight=20
     //% blockId=motor_motorStop block="motor |%motors stop"
     //% motors.fieldEditor="gridpicker" motors.fieldOptions.columns=2 
+    //% subcategory="Motors"
     export function motorStop(motors: Motors): void {
         let buf = pins.createBuffer(3);
         if (motors == 0) {
