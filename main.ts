@@ -1,17 +1,17 @@
 enum Motors {
-    //% blockId="left motor" block="left"
+    //% blockId="feft motor" block="Left"
     M1 = 0,
-    //% blockId="right motor" block="right"
+    //% blockId="right motor" block="Right"
     M2 = 1,
-    //% blockId="all motor" block="all"
+    //% blockId="all motor" block="All"
     All = 2,
 }
 enum IRs {
-    //% blockId="left ir" block="left"
+    //% blockId="left ir" block="Left"
     Left = 0,
-    //% blockId="right ir" block="right"
+    //% blockId="right ir" block="Right"
     Right = 1,
-    //% blockId="1in2 ir" block="all"
+    //% blockId="1in2 ir" block="1in2"
     OneinTwo = 2,
 }
 enum Voltage {
