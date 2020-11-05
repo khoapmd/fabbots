@@ -63,17 +63,6 @@ namespace FabBots {
     }
 
     /**
-    * Display text on the display, one character at a time via MQTT. If the string fits on the screen (i.e. is one letter), does not scroll.
-    * @param text the text to scroll on the screen, eg: "fabtopic!"
-    */
-    //% block="Control FabBots From Blynk"
-    //% subcategory="Blynk"
-    export function controlformBlynk() {
-      let sendText = "Blynk" 
-      sendString(sendText, 100) // connect to website server
-    }
-
-    /**
      * Read IR sensor value.
     */
     
@@ -243,12 +232,23 @@ namespace FabBots {
     }
 
     /**
+    * Display text on the display, one character at a time via MQTT. If the string fits on the screen (i.e. is one letter), does not scroll.
+    * @param text the text to scroll on the screen, eg: "fabtopic!"
+    */
+    //% block="Control FabBots From Blynk"
+    //% subcategory="Blynk"
+    export function controlformBlynk() {
+      let sendText = "Blynk" 
+      sendString(sendText, 100)
+    }
+
+    /**
     * Check if ESP8266 successfully connected to Wifi
     */
     //% block="Blynk connected ?"
     //% subcategory="Blynk"
     export function isBlynkConnected() {
-        sendString("Blynk")
+        sendString("isConnected")
         waitResponse()
         return blynk_connected
     }
