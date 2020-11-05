@@ -44,32 +44,6 @@ namespace FabBots {
     }
 
     /**
-     * Set the direction and speed of Maqueen motor.
-     */
-
-    //% weight=90
-    //% blockId=motor_MotorRun block="motor|%index|move|%Dir|at speed|%speed"
-    //% speed.min=0 speed.max=255
-    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
-    //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=2
-    //% subcategory="Motors"
-    export function motorRun(index: Motors, direction: Dir, speed: number): void {
-        let send_str: string = ""
-        send_str = "M" + index + "." + "D" + direction + "." + "S" + speed + "."
-        sendString(send_str);
-    }
-
-    /**
-    * Display text on the display, one character at a time via MQTT. If the string fits on the screen (i.e. is one letter), does not scroll.
-    * @param text the text to scroll on the screen, eg: "fabtopic!"
-    */
-    //% block="Control FabBots From Blynk"
-    export function controlformBlynk() {
-      let sendText = "Blynk" 
-      sendString(sendText, 100) // connect to website server
-    }
-
-    /**
     * Initial FabBots Conection
     * @param text the text to scroll on the Array.splice(0, 0)
     */
@@ -83,6 +57,32 @@ namespace FabBots {
       //let sendText = "Init" 
       //sendString(sendText, 100) // connect to website server
     }
+
+    /**
+    * Display text on the display, one character at a time via MQTT. If the string fits on the screen (i.e. is one letter), does not scroll.
+    * @param text the text to scroll on the screen, eg: "fabtopic!"
+    */
+    //% block="Control FabBots From Blynk"
+    export function controlformBlynk() {
+      let sendText = "Blynk" 
+      sendString(sendText, 100) // connect to website server
+    }
+
+    /**
+     * Set the direction and speed of FabBots motor.
+     */
+
+    //% weight=90
+    //% blockId=motor_MotorRun block="motor|%index|move|%Dir|at speed|%speed"
+    //% speed.min=0 speed.max=255
+    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
+    //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=2
+    //% subcategory="Motors"
+    export function motorRun(index: Motors, direction: Dir, speed: number): void {
+        let send_str: string = ""
+        send_str = "M" + index + "." + "D" + direction + "." + "S" + speed + "."
+        sendString(send_str);
+    }   
 
     // wait for certain response from Nano
     function waitResponse() {
