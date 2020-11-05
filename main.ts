@@ -1,10 +1,10 @@
 enum Motors {
     //% blockId="feft motor" block="Left"
-    M1 = 0,
+    M1 = 1,
     //% blockId="right motor" block="Right"
-    M2 = 1,
+    M2 = 2,
     //% blockId="all motor" block="All"
-    All = 2,
+    All = 3,
 }
 enum IRs {
     //% blockId="left ir" block="Left"
