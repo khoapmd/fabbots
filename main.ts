@@ -203,6 +203,7 @@ namespace FabBots {
 
     // wait for certain response from Nano
     function waitResponse() {
+        if(blynk_connected == true) return
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
             let serial_str: string = ""
             let time: number = input.runningTime()
