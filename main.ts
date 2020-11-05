@@ -69,6 +69,16 @@ namespace FabBots {
       sendString(sendText, 100) // connect to website server
     }
 
+    /**
+    * Display text on the display, one character at a time via MQTT. If the string fits on the screen (i.e. is one letter), does not scroll.
+    * @param text the text to scroll on the screen, eg: "fabtopic!"
+    */
+    //% block="Initial FabBots"
+    export function initFabbots() {
+      let sendText = "Init" 
+      sendString(sendText, 100) // connect to website server
+    }
+
     // wait for certain response from Nano
     function waitResponse() {
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
