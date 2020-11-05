@@ -97,8 +97,8 @@ namespace FabBots {
      */
 
     //% weight=10
-    //% blockId=IR_read block="read IR key value"
-    export function IR_read(): number {
+    //% blockId=IR_read block="read IR %ir key value"
+    export function IR_read(ir: IRs): number {
         return 0
     }
 
