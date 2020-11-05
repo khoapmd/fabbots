@@ -78,6 +78,7 @@ namespace FabBots {
     
     //% weight=10
     //% blockId=IR_read block="Read %ir IR key value"
+    //% subcategory="Sensors"
     export function IR_read(ir: IRs): number {
         return 0
     }
@@ -88,6 +89,7 @@ namespace FabBots {
 
     //% blockId=ultrasonic_sensor block="Read ultrasonic sensor |%unit "
     //% weight=95
+    //% subcategory="Sensors"
     export function Ultrasonic(unit: PingUnit, maxCmDistance = 500): number {
         let d
         pins.digitalWritePin(DigitalPin.P1, 0);
