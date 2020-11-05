@@ -1,13 +1,3 @@
-enum MQTTPort {
-    //% block=default:1883
-    MQTTPort1883 = 1883,
-    //% block=SSL:8883
-    MQTTPort8883 = 8883,
-    //% block=WS:8083
-    MQTTPort8083 = 8083,
-    //% block=WS/SSL:8084
-    MQTTPort8084 = 8084,
-};
 enum Motors {
     //% blockId="left motor" block="left"
     M1 = 0,
