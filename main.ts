@@ -54,27 +54,9 @@ namespace FabBots {
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=2
     //% subcategory="Motors"
     export function motorRun(index: Motors, direction: Dir, speed: number): void {
-        let buf = pins.createBuffer(3);
-        if (index == 0) {
-            buf[0] = 0x00;
-            buf[1] = direction;
-            buf[2] = speed;
-            pins.i2cWriteBuffer(0x10, buf);
-        }
-        if (index == 1) {
-            buf[0] = 0x02;
-            buf[1] = direction;
-            buf[2] = speed;
-            pins.i2cWriteBuffer(0x10, buf);
-        }
-        if (index == 2) {
-            buf[0] = 0x00;
-            buf[1] = direction;
-            buf[2] = speed;
-            pins.i2cWriteBuffer(0x10, buf);
-            buf[0] = 0x02;
-            pins.i2cWriteBuffer(0x10, buf);
-        }
+        let send_str: string = ""
+        send_str = "M" + index + "." + "D" + direction + "." + "S" + speed + "."
+        sendString(send_str);
     }
 
     /**
@@ -90,7 +72,7 @@ namespace FabBots {
       sendString(sendText, 100) // connect to website server
     }
 
-    // wait for certain response from ESP8266
+    // wait for certain response from Nano
     function waitResponse() {
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
             let serial_str: string = ""
