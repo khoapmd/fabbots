@@ -71,7 +71,7 @@ namespace FabBots {
 
     /**
     * Initial FabBots Conection
-    * @param text the text to scroll on the screen, eg: "fabtopic!"
+    * @param text the text to scroll on the Array.splice(0, 0)
     */
     //% block="Initial FabBots"
     export function initFabbots() {
