@@ -56,7 +56,7 @@ namespace FabBots {
         serial.redirect(
             SerialPin.P1,
             SerialPin.P0,
-            BaudRate.BaudRate115200
+            BaudRate.BaudRate9600
         )
       //let sendText = "Init" 
       //sendString(sendText, 100) // connect to website server
