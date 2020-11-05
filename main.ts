@@ -67,6 +67,7 @@ namespace FabBots {
     * @param text the text to scroll on the screen, eg: "fabtopic!"
     */
     //% block="Control FabBots From Blynk"
+    //% subcategory="Blynk"
     export function controlformBlynk() {
       let sendText = "Blynk" 
       sendString(sendText, 100) // connect to website server
