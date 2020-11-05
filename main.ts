@@ -70,7 +70,7 @@ namespace FabBots {
     }
 
     /**
-    * Display text on the display, one character at a time via MQTT. If the string fits on the screen (i.e. is one letter), does not scroll.
+    * Initial FabBots Conection
     * @param text the text to scroll on the screen, eg: "fabtopic!"
     */
     //% block="Initial FabBots"
