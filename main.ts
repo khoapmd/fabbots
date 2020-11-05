@@ -126,7 +126,7 @@ namespace FabBots {
     //% subcategory="Motors"
     export function motorRun(index: Motors, direction: Dir, speed: number): void {
         let send_str: string = ""
-        send_str = "M" + index + "." + "D" + direction + "." + "S" + speed + "."
+        send_str = "M" + index + "." + "D" + direction + "." + "S" + speed
         sendString(send_str);
     }
 
