@@ -18,11 +18,17 @@ enum Motors {
 }
 enum IRs {
     //% blockId="left ir" block="left"
-    A0 = 0,
+    Left = 0,
     //% blockId="right ir" block="right"
-    A1 = 1,
+    Right = 1,
     //% blockId="1in2 ir" block="all"
     OneinTwo = 2,
+}
+enum Voltage {
+    //%block="high"
+    High = 1,
+    //% block="low"
+    Low = 0
 }
 enum Dir {
         //% blockId="CW" block="Forward"
@@ -77,6 +83,45 @@ namespace FabBots {
     }
 
     /**
+     * Read IR sensor value.
+    */
+    
+    //% weight=10
+    //% blockId=IR_read block="Read %ir IR key value"
+    export function IR_read(ir: IRs): number {
+        return 0
+    }
+
+    /**
+     * Read ultrasonic sensor.
+     */
+
+    //% blockId=ultrasonic_sensor block="read ultrasonic sensor |%unit "
+    //% weight=95
+    export function Ultrasonic(unit: PingUnit, maxCmDistance = 500): number {
+        let d
+        pins.digitalWritePin(DigitalPin.P1, 0);
+        if (pins.digitalReadPin(DigitalPin.P2) == 0) {
+            pins.digitalWritePin(DigitalPin.P1, 1);
+            pins.digitalWritePin(DigitalPin.P1, 0);
+            d = pins.pulseIn(DigitalPin.P2, PulseValue.High, maxCmDistance * 58);
+        } else {
+            pins.digitalWritePin(DigitalPin.P1, 0);
+            pins.digitalWritePin(DigitalPin.P1, 1);
+            d = pins.pulseIn(DigitalPin.P2, PulseValue.Low, maxCmDistance * 58);
+        }
+        let x = d / 39;
+        if (x <= 0 || x > 500) {
+            return 0;
+        }
+        switch (unit) {
+            case PingUnit.Centimeters: return Math.round(x);
+            default: return Math.idiv(d, 2.54);
+        }
+
+    }
+
+    /**
      * Set the direction and speed of FabBots motor.
      */
 
@@ -93,13 +138,83 @@ namespace FabBots {
     }
 
     /**
-     * Read IR sensor value.
-    */
-    //% weight=10
-    //% blockId=IR_read block="Read %ir IR key value"
-    export function IR_read(ir: IRs): number {
-        return 0
+     * Stop the FabBots motor.
+     */
+    //% weight=20
+    //% blockId=motor_motorStop block="motor |%motors stop"
+    //% motors.fieldEditor="gridpicker" motors.fieldOptions.columns=2 
+    export function motorStop(motors: Motors): void {
+        let buf = pins.createBuffer(3);
+        if (motors == 0) {
+            buf[0] = 0x00;
+            buf[1] = 0;
+            buf[2] = 0;
+            pins.i2cWriteBuffer(0x10, buf);
+        }
+        if (motors == 1) {
+            buf[0] = 0x02;
+            buf[1] = 0;
+            buf[2] = 0;
+            pins.i2cWriteBuffer(0x10, buf);
+        }
+
+        if (motors == 2) {
+            buf[0] = 0x00;
+            buf[1] = 0;
+            buf[2] = 0;
+            pins.i2cWriteBuffer(0x10, buf);
+            buf[0] = 0x02;
+            pins.i2cWriteBuffer(0x10, buf);
+        }
+
     }
+
+    /**
+     * Read line tracking sensor.
+     */
+
+    //% weight=20
+    //% blockId=read_Patrol block="read |%patrol line tracking sensor"
+    //% patrol.fieldEditor="gridpicker" patrol.fieldOptions.columns=2 
+    export function readPatrol(patrol: IRs): number {
+        if (patrol == IRs.Left) {
+            return pins.digitalReadPin(DigitalPin.P13)
+        } else if (patrol == IRs.Right) {
+            return pins.digitalReadPin(DigitalPin.P14)
+        } else {
+            return -1
+        }
+    }
+
+     /**
+     * Line tracking sensor event function
+     */
+    //% weight=2
+    //% blockId=kb_event block="on|%value line tracking sensor|%vi"
+    export function ltEvent(value: IRs, vi: Voltage, a: Action) {
+         let state = value + vi;
+    }
+    let x:number
+    let i:number = 1;
+    function patorlState():number{
+        switch(i){
+            case 1: x = pins.digitalReadPin(DigitalPin.P13) == 0 ? 0x10:0;break;
+            case 2: x = pins.digitalReadPin(DigitalPin.P13) == 1 ? 0x11:0;break;
+            case 3: x = pins.digitalReadPin(DigitalPin.P14) == 0 ? 0x20:0;break;
+            default:x = pins.digitalReadPin(DigitalPin.P14) == 1 ? 0x21:0;break;
+        }
+        i+=1;
+        if(i==5)i=1;
+        
+        return x;
+    }
+
+    basic.forever(() => {
+        
+        basic.pause(50);
+    })
+
+
 
     // wait for certain response from Nano
     function waitResponse() {
@@ -140,5 +255,4 @@ namespace FabBots {
         waitResponse()
         return blynk_connected
     }
-
 }
