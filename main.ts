@@ -15,9 +15,9 @@ enum IRs {
     OneinTwo = 2,
 }
 enum Voltage {
-    //%block="high"
+    //%block="High"
     High = 1,
-    //% block="low"
+    //% block="Low"
     Low = 0
 }
 enum Dir {
