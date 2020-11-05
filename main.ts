@@ -94,10 +94,9 @@ namespace FabBots {
 
     /**
      * Read IR sensor value.
-     */
-
+    */
     //% weight=10
-    //% blockId=IR_read block="read IR %ir key value"
+    //% blockId=IR_read block="Read %ir IR key value"
     export function IR_read(ir: IRs): number {
         return 0
     }
