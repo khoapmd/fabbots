@@ -63,12 +63,9 @@ namespace FabBots {
     * Display text on the display, one character at a time via MQTT. If the string fits on the screen (i.e. is one letter), does not scroll.
     * @param text the text to scroll on the screen, eg: "fabtopic!"
     */
-    //% block="Topic to display = %topic"
-    //% topic.defl=fabtopic
-    //% subcategory="MQTT"
-    export function sendTopic(topic: string) {
-
-      let sendText = "TOPIC:" + topic
+    //% block="Control FabBots From Blynk"
+    export function controlformBlynk() {
+      let sendText = "Blynk" 
       sendString(sendText, 100) // connect to website server
     }
 
