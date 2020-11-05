@@ -16,6 +16,14 @@ enum Motors {
     //% blockId="all motor" block="all"
     All = 2,
 }
+enum IRs {
+    //% blockId="left ir" block="left"
+    A0 = 0,
+    //% blockId="right ir" block="right"
+    A1 = 1,
+    //% blockId="1in2 ir" block="all"
+    OneinTwo = 2,
+}
 enum Dir {
         //% blockId="CW" block="Forward"
         CW = 0,
@@ -50,8 +58,8 @@ namespace FabBots {
     //% block="Initial FabBots"
     export function initFabbots() {
         serial.redirect(
-            SerialPin.P0,
             SerialPin.P1,
+            SerialPin.P0,
             BaudRate.BaudRate115200
         )
       //let sendText = "Init" 
@@ -82,7 +90,17 @@ namespace FabBots {
         let send_str: string = ""
         send_str = "M" + index + "." + "D" + direction + "." + "S" + speed + "."
         sendString(send_str);
-    }   
+    }
+
+    /**
+     * Read IR sensor value.
+     */
+
+    //% weight=10
+    //% blockId=IR_read block="read IR key value"
+    export function IR_read(): number {
+        return 0
+    }
 
     // wait for certain response from Nano
     function waitResponse() {
