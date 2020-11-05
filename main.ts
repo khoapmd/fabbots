@@ -249,7 +249,9 @@ namespace FabBots {
     //% block="Blynk connected ?"
     //% subcategory="Blynk"
     export function isBlynkConnected() {
-        sendString("isConnected")
+        if(blynk_connected == false){
+            sendString("isConnected")
+        }
         waitResponse()
         basic.pause(2000)
         return blynk_connected
