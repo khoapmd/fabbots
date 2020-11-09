@@ -61,7 +61,7 @@ namespace FabBots {
         )
       let sendText = "Init" 
       sendString(sendText, 0) // wait response from Nano
-      waitResponse()
+      while(!init_successful){}
     }
 
     /**
@@ -199,10 +199,18 @@ namespace FabBots {
     basic.forever(() => {
         
         //basic.pause(50);
-        waitResponse()
     })
 
-
+    let serial_str: string = ""
+    serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
+        serial_str = serial.readString()
+        if (serial_str.includes("BOK")) {
+            blynk_connected = true
+        }
+        if (serial_str.includes("IOK")) {
+            init_successful = true
+        }
+    })
 
     // wait for certain response from Nano
     function waitResponse() {
@@ -271,7 +279,6 @@ namespace FabBots {
         if(blynk_connected == false){
             sendString("isConnected", 0)
         }
-        waitResponse()
         return blynk_connected
     }
 }
