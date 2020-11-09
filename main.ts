@@ -60,8 +60,10 @@ namespace FabBots {
             BaudRate.BaudRate9600
         )
       let sendText = "Init" 
-      sendString(sendText, 0) // wait response from Nano
-      while(!init_successful){}
+      while(!init_successful){
+          basic.pause(500)
+          sendString(sendText, 0) // wait response from Nano
+      }
     }
 
     /**
@@ -276,7 +278,8 @@ namespace FabBots {
     //% block="Blynk connected ?"
     //% subcategory="Blynk"
     export function isBlynkConnected() {
-        if(blynk_connected == false){
+        while(!blynk_connected){
+            basic.pause(2000)
             sendString("isConnected", 0)
         }
         return blynk_connected
