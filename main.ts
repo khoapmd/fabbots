@@ -199,6 +199,7 @@ namespace FabBots {
     basic.forever(() => {
         
         //basic.pause(50);
+        waitResponse()
     })
 
 
@@ -218,23 +219,23 @@ namespace FabBots {
                     init_successful = true
                     break
                 } 
-                if (input.runningTime() - time > 5000) break
+                if (input.runningTime() - time > 10) break
             }
         })
-        if(blynk_connected == false){
-            if (input.runningTime() - lastReconnectAttempt > 1000) {
-                lastReconnectAttempt = input.runningTime();
-                index |= 0;
-                const x = Math.floor(index % 5);
-                const y = Math.floor(index / 5);
-                led.plot(x, y);
-                index++
-                if(index >= 26){
-                    index = 0
-                    basic.clearScreen()
-                } 
-            }
-        }
+        // if(blynk_connected == false){
+        //     if (input.runningTime() - lastReconnectAttempt > 1000) {
+        //         lastReconnectAttempt = input.runningTime();
+        //         index |= 0;
+        //         const x = Math.floor(index % 5);
+        //         const y = Math.floor(index / 5);
+        //         led.plot(x, y);
+        //         index++
+        //         if(index >= 26){
+        //             index = 0
+        //             basic.clearScreen()
+        //         } 
+        //     }
+        // }
     }
 
     /**
