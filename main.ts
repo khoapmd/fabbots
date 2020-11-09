@@ -206,10 +206,10 @@ namespace FabBots {
     let serial_str: string = ""
     serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
         serial_str = serial.readString()
-        if (serial_str.includes("BOK")) {
+        if (serial_str.includes("Blynk_OK")) {
             blynk_connected = true
         }
-        if (serial_str.includes("IOK")) {
+        if (serial_str.includes("Init_OK")) {
             init_successful = true
         }
     })
