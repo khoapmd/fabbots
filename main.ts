@@ -208,7 +208,7 @@ namespace FabBots {
             let time: number = input.runningTime()
             while (true) {
                 serial_str += serial.readString()
-                if (serial_str.includes("OK")) {
+                if (serial_str.includes("BOK")) {
                     blynk_connected = true
                     break
                 } 
@@ -238,8 +238,10 @@ namespace FabBots {
     //% block="Control FabBots From Blynk"
     //% subcategory="Blynk"
     export function controlformBlynk() {
-      let sendText = "Blynk" 
-      sendString(sendText, 100)
+        let sendText = "CFB" 
+        if(blynk_connected == true){
+            sendString(sendText, 500)
+        }
     }
 
     /**
@@ -249,10 +251,9 @@ namespace FabBots {
     //% subcategory="Blynk"
     export function isBlynkConnected() {
         if(blynk_connected == false){
-            sendString("isConnected")
+            sendString("isConnected", 0)
         }
         waitResponse()
-        basic.pause(2000)
         return blynk_connected
     }
 }
