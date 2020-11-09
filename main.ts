@@ -121,10 +121,10 @@ namespace FabBots {
     //% subcategory="Motors"
     export function motorRun(index: Motors, direction: Dir, speed: number): void {
         let send_str: string = ""
-        send_str = "M" + index + "." + "D" + direction + "." + "S" + speed
+        send_str = "M" + (index*100 + direction*10 + speed).toString()
         while(!nano_reply){
             sendString(send_str, 100);
-        } 
+        }
         nano_reply = false
     }
 
