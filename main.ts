@@ -37,14 +37,15 @@ enum PingUnit {
 namespace FabBots {
     let blynk_connected: boolean = false
     let init_successful: boolean = false
+    let blynk_controller: boolean = false
     let displayString: string = ""
     let lastReconnectAttempt: number = 0
     let index: number = 0
 
     // write String to ESP
     function sendString(command: string, wait: number = 100) {
-        serial.writeLine(command)
         basic.pause(wait)
+        serial.writeLine(command)
     }
 
     /**
@@ -61,8 +62,7 @@ namespace FabBots {
         )
       let sendText = "Init" 
       while(!init_successful){
-          basic.pause(500)
-          sendString(sendText, 0) // wait response from Nano
+          sendString(sendText, 500) // wait response from Nano
       }
     }
 
@@ -212,26 +212,15 @@ namespace FabBots {
         if (serial_str.includes("Init_OK")) {
             init_successful = true
         }
+        if (serial_str.includes("CFB_OK")) {
+            blynk_controller = true
+        }
+        if (serial_str.includes("CFM_OK")) {
+            blynk_controller = false
+        }
     })
 
-    // wait for certain response from Nano
-    function waitResponse() {
-        serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
-            let serial_str: string = ""
-            let time: number = input.runningTime()
-            while (true) {
-                serial_str += serial.readString()
-                if (serial_str.includes("BOK")) {
-                    blynk_connected = true
-                    break
-                }
-                if (serial_str.includes("IOK")) {
-                    init_successful = true
-                    break
-                } 
-                if (input.runningTime() - time > 10) break
-            }
-        })
+    
         // if(blynk_connected == false){
         //     if (input.runningTime() - lastReconnectAttempt > 1000) {
         //         lastReconnectAttempt = input.runningTime();
@@ -246,7 +235,7 @@ namespace FabBots {
         //         } 
         //     }
         // }
-    }
+    
 
     /**
     * Display text on the display, one character at a time via MQTT. If the string fits on the screen (i.e. is one letter), does not scroll.
@@ -256,8 +245,8 @@ namespace FabBots {
     //% subcategory="Blynk"
     export function controlformBlynk() {
         let sendText = "CFB" 
-        if(blynk_connected == true){
-            sendString(sendText, 500)
+        while(!blynk_controller){
+            sendString(sendText, 2000)
         }
     }
 
@@ -269,7 +258,9 @@ namespace FabBots {
     //% subcategory="Blynk"
     export function controlformMicrobit() {
         let sendText = "CFM"
-        sendString(sendText, 500)
+        while(blynk_controller){
+            sendString(sendText, 2000)
+        }
     }
 
     /**
@@ -279,8 +270,7 @@ namespace FabBots {
     //% subcategory="Blynk"
     export function isBlynkConnected() {
         while(!blynk_connected){
-            basic.pause(2000)
-            sendString("isConnected", 0)
+            sendString("Blynk", 2000)
         }
         return blynk_connected
     }
