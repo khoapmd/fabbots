@@ -36,7 +36,7 @@ enum PingUnit {
 //% color=#009b5b icon="\uf1eb" block="FabBots"
 namespace FabBots {
     let blynk_connected: boolean = false
-    let last_upload_successful: boolean = false
+    let init_successful: boolean = false
     let displayString: string = ""
     let lastReconnectAttempt: number = 0
     let index: number = 0
@@ -53,13 +53,15 @@ namespace FabBots {
     */
     //% block="Initial FabBots"
     export function initFabbots() {
+        basic.pause(500)
         serial.redirect(
             SerialPin.P0,
             SerialPin.P1,
             BaudRate.BaudRate9600
         )
-      //let sendText = "Init" 
-      //sendString(sendText, 100) // connect to website server
+      let sendText = "Init" 
+      sendString(sendText, 0) // wait response from Nano
+      waitResponse()
     }
 
     /**
@@ -211,6 +213,10 @@ namespace FabBots {
                 if (serial_str.includes("BOK")) {
                     blynk_connected = true
                     break
+                }
+                if (serial_str.includes("IOK")) {
+                    init_successful = true
+                    break
                 } 
                 if (input.runningTime() - time > 10) break
             }
@@ -242,6 +248,17 @@ namespace FabBots {
         if(blynk_connected == true){
             sendString(sendText, 500)
         }
+    }
+
+    /**
+    * Display text on the display, one character at a time via MQTT. If the string fits on the screen (i.e. is one letter), does not scroll.
+    * @param text the text to scroll on the screen, eg: "fabtopic!"
+    */
+    //% block="Control FabBots From Blynk"
+    //% subcategory="Blynk"
+    export function controlformMicrobit() {
+        let sendText = "CFM"
+        sendString(sendText, 500)
     }
 
     /**
