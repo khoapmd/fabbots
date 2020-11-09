@@ -35,10 +35,11 @@ enum PingUnit {
  */
 //% color=#009b5b icon="\uf1eb" block="FabBots"
 namespace FabBots {
-    let blynk_connected: boolean = false
     let init_successful: boolean = false
+    let blynk_connected: boolean = false
     let blynk_controller: boolean = false
     let microbit_controller: boolean = false
+    let nano_reply: boolean = false
     let displayString: string = ""
     let lastReconnectAttempt: number = 0
     let index: number = 0
@@ -121,7 +122,10 @@ namespace FabBots {
     export function motorRun(index: Motors, direction: Dir, speed: number): void {
         let send_str: string = ""
         send_str = "M" + index + "." + "D" + direction + "." + "S" + speed
-        sendString(send_str);
+        while(!nano_reply){
+            sendString(send_str, 100);
+        } 
+        nano_reply = false
     }
 
     /**
@@ -204,25 +208,6 @@ namespace FabBots {
         //basic.pause(50);
     })
 
-    let serial_str: string = ""
-    serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
-        serial_str = serial.readString()
-        if (serial_str.includes("Blynk_OK")) {
-            blynk_connected = true
-        }
-        if (serial_str.includes("Init_OK")) {
-            init_successful = true
-        }
-        if (serial_str.includes("CFB_OK")) {
-            blynk_controller = true
-            microbit_controller = false
-        }
-        if (serial_str.includes("CFM_OK")) {
-            microbit_controller = true
-            blynk_controller = false
-        }
-    })
-
     
         // if(blynk_connected == false){
         //     if (input.runningTime() - lastReconnectAttempt > 1000) {
@@ -277,4 +262,28 @@ namespace FabBots {
         }
         return blynk_connected
     }
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////READ SERIAL/////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+    let serial_str: string = ""
+    serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
+        serial_str = serial.readString()
+        if (serial_str.includes("Blynk_OK")) {
+            blynk_connected = true
+        }
+        if (serial_str.includes("Init_OK")) {
+            init_successful = true
+        }
+        if (serial_str.includes("CFB_OK")) {
+            blynk_controller = true
+            microbit_controller = false
+        }
+        if (serial_str.includes("CFM_OK")) {
+            microbit_controller = true
+            blynk_controller = false
+        }
+        if (serial_str.includes("Reply_OK")) {
+            nano_reply = true
+        }
+    })
 }
