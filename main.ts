@@ -218,7 +218,7 @@ namespace FabBots {
                     init_successful = true
                     break
                 } 
-                if (input.runningTime() - time > 10000) break
+                if (input.runningTime() - time > 5000) break
             }
         })
         if(blynk_connected == false){
