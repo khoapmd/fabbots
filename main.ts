@@ -198,7 +198,7 @@ namespace FabBots {
 
     basic.forever(() => {
         
-        basic.pause(50);
+        //basic.pause(50);
     })
 
 
