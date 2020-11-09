@@ -38,6 +38,7 @@ namespace FabBots {
     let blynk_connected: boolean = false
     let init_successful: boolean = false
     let blynk_controller: boolean = false
+    let microbit_controller: boolean = false
     let displayString: string = ""
     let lastReconnectAttempt: number = 0
     let index: number = 0
@@ -214,8 +215,10 @@ namespace FabBots {
         }
         if (serial_str.includes("CFB_OK")) {
             blynk_controller = true
+            microbit_controller = false
         }
         if (serial_str.includes("CFM_OK")) {
+            microbit_controller = true
             blynk_controller = false
         }
     })
@@ -258,7 +261,7 @@ namespace FabBots {
     //% subcategory="Blynk"
     export function controlformMicrobit() {
         let sendText = "CFM"
-        while(blynk_controller){
+        while(!microbit_controller){
             sendString(sendText, 2000)
         }
     }
