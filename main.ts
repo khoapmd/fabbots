@@ -54,8 +54,8 @@ namespace FabBots {
     //% block="Initial FabBots"
     export function initFabbots() {
         serial.redirect(
-            SerialPin.P1,
             SerialPin.P0,
+            SerialPin.P1,
             BaudRate.BaudRate9600
         )
       //let sendText = "Init" 
