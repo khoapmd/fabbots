@@ -226,10 +226,10 @@ namespace FabBots {
     
 
     /**
-    * Display text on the display, one character at a time via MQTT. If the string fits on the screen (i.e. is one letter), does not scroll.
+    * Manual control FabBots from Blynk
     * @param text the text to scroll on the screen, eg: "fabtopic!"
     */
-    //% block="Manual control FabBots from Blynk"
+    //% block="Control FabBots from Blynk"
     //% subcategory="Blynk"
     export function controlformBlynk() {
         let sendText = "CFB" 
@@ -243,7 +243,6 @@ namespace FabBots {
     * @param text the text to scroll on the screen, eg: "fabtopic!"
     */
     //% block="Control FabBots From Microbit"
-    //% subcategory="Blynk"
     export function controlformMicrobit() {
         let sendText = "CFM"
         while(!microbit_controller){
