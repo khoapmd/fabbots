@@ -122,9 +122,9 @@ namespace FabBots {
     export function motorRun(index: Motors, direction: Dir, speed: number): void {
         let send_str: string = ""
         send_str = "MC" + (speed*100 + direction*10 + index).toString()
-        while(!nano_reply){
+        // while(!nano_reply){
             sendString(send_str, 200);
-        }
+        // }
         nano_reply = false
     }
 
