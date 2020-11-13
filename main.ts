@@ -104,6 +104,8 @@ namespace FabBots {
     export function motorRun(index: Motors, direction: Dir, speed: number): void {
         nano_reply = false
         let send_str: string = ""
+        if(speed < 0) speed = 0
+        if(speed > 255) speed = 255
         send_str = "MC" + (speed*100 + direction*10 + index).toString()
         while(!nano_reply){
             sendString(send_str, 50);
