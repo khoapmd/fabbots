@@ -39,7 +39,8 @@ namespace FabBots {
     let blynk_connected: boolean = false
     let blynk_controller: boolean = false
     let microbit_controller: boolean = false
-    let nano_reply: boolean = false
+    let motor_reply: boolean = false
+    let ul_reply: boolean = false
     let displayString: string = ""
     let lastReconnectAttempt: number = 0
     let index: number = 0
@@ -88,6 +89,12 @@ namespace FabBots {
     //% weight=95
     //% subcategory="Sensors"
     export function Ultrasonic(unit: PingUnit, maxCmDistance = 500): number {
+        ul_reply = false
+        let send_str: string = ""
+        send_str = "UL"
+        while(!ul_reply){
+            sendString(send_str, 50);
+        }
         return uldistance;
     }
 
@@ -102,12 +109,12 @@ namespace FabBots {
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=2
     //% subcategory="Motors"
     export function motorRun(index: Motors, direction: Dir, speed: number): void {
-        nano_reply = false
+        motor_reply = false
         let send_str: string = ""
         if(speed < 0) speed = 0
         if(speed > 255) speed = 255
         send_str = "MC" + (speed*100 + direction*10 + index).toString()
-        while(!nano_reply){
+        while(!motor_reply){
             sendString(send_str, 50);
         }
     }
@@ -122,10 +129,10 @@ namespace FabBots {
     export function motorStop(index: Motors): void {
         let send_str: string = ""
         send_str = "MC" + (0*100 + 1*10 + index).toString()
-        //while(!nano_reply){
+        //while(!motor_reply){
             sendString(send_str, 0);
         //}
-        //nano_reply = false
+        //motor_reply = false
     }
 
     /**
@@ -248,8 +255,12 @@ namespace FabBots {
             microbit_controller = true
             blynk_controller = false
         }
-        if (serial_str.includes("Reply_OK")) {
-            nano_reply = true
+        if (serial_str.includes("Motor_OK")) {
+            motor_reply = true
+        }
+        if (serial_str.includes("UL")) {
+            uldistance = parseFloat(serial_str)
+            ul_reply = true
         }
     })
 }
