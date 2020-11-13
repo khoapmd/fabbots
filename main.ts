@@ -43,6 +43,7 @@ namespace FabBots {
     let displayString: string = ""
     let lastReconnectAttempt: number = 0
     let index: number = 0
+    let uldistance: number = 0
 
     // write String to ESP
     function sendString(command: string, wait: number = 100) {
@@ -87,26 +88,7 @@ namespace FabBots {
     //% weight=95
     //% subcategory="Sensors"
     export function Ultrasonic(unit: PingUnit, maxCmDistance = 500): number {
-        let d
-        pins.digitalWritePin(DigitalPin.P1, 0);
-        if (pins.digitalReadPin(DigitalPin.P2) == 0) {
-            pins.digitalWritePin(DigitalPin.P1, 1);
-            pins.digitalWritePin(DigitalPin.P1, 0);
-            d = pins.pulseIn(DigitalPin.P2, PulseValue.High, maxCmDistance * 58);
-        } else {
-            pins.digitalWritePin(DigitalPin.P1, 0);
-            pins.digitalWritePin(DigitalPin.P1, 1);
-            d = pins.pulseIn(DigitalPin.P2, PulseValue.Low, maxCmDistance * 58);
-        }
-        let x = d / 39;
-        if (x <= 0 || x > 500) {
-            return 0;
-        }
-        switch (unit) {
-            case PingUnit.Centimeters: return Math.round(x);
-            default: return Math.idiv(d, 2.54);
-        }
-
+        return uldistance;
     }
 
     /**
@@ -166,7 +148,7 @@ namespace FabBots {
      * Line tracking sensor event function
      */
     //% weight=2
-    //% blockId=kb_event block="on|%value line tracking sensor|%vi"
+    //% blockId=kb_event block="On|%value line tracking sensor|%vi"
     //% subcategory="Sensors"
     export function ltEvent(value: IRs, vi: Voltage, a: Action) {
          let state = value + vi;
