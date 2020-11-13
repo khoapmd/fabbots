@@ -135,9 +135,9 @@ namespace FabBots {
     //% blockId=motor_motorStop block="motor |%motors stop"
     //% motors.fieldEditor="gridpicker" motors.fieldOptions.columns=2 
     //% subcategory="Motors"
-    export function motorStop(motors: Motors): void {
+    export function motorStop(index: Motors): void {
         let send_str: string = ""
-        send_str = "MC" + (0*100 + 1*10 + motors).toString()
+        send_str = "MC" + (0*100 + 1*10 + index).toString()
         while(!nano_reply){
             sendString(send_str, 200);
         }
