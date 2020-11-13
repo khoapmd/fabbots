@@ -22,9 +22,9 @@ enum Voltage {
 }
 enum Dir {
         //% blockId="CW" block="Forward"
-        CW = 0,
+        CW = 1,
         //% blockId="CCW" block="Backward"
-        CCW = 1,
+        CCW = 2,
 }
 enum PingUnit {
     //% block="cm"
