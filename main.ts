@@ -137,7 +137,7 @@ namespace FabBots {
     //% subcategory="Motors"
     export function motorStop(motors: Motors): void {
         let send_str: string = ""
-        send_str = "MC" + (0*100 + 1*10 + index).toString()
+        send_str = "MC" + (0*100 + 1*10 + motors).toString()
         while(!nano_reply){
             sendString(send_str, 200);
         }
