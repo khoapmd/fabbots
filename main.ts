@@ -88,7 +88,7 @@ namespace FabBots {
     //% blockId=ultrasonic_sensor block="Read ultrasonic sensor |%unit "
     //% weight=95
     //% subcategory="Sensors"
-    export function Ultrasonic(unit: PingUnit, maxCmDistance = 500): number {
+    export function Ultrasonic(unit: PingUnit): number {
         ul_reply = false
         let send_str: string = ""
         send_str = "UL"
