@@ -124,7 +124,7 @@ namespace FabBots {
         let send_str: string = ""
         send_str = "MC" + (speed*100 + direction*10 + index).toString()
         while(!nano_reply){
-            sendString(send_str, 10);
+            sendString(send_str, 50);
         }
     }
 
