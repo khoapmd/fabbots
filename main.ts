@@ -136,29 +136,12 @@ namespace FabBots {
     //% motors.fieldEditor="gridpicker" motors.fieldOptions.columns=2 
     //% subcategory="Motors"
     export function motorStop(motors: Motors): void {
-        let buf = pins.createBuffer(3);
-        if (motors == 0) {
-            buf[0] = 0x00;
-            buf[1] = 0;
-            buf[2] = 0;
-            pins.i2cWriteBuffer(0x10, buf);
+        let send_str: string = ""
+        send_str = "MC" + (0*100 + 1*10 + index).toString()
+        while(!nano_reply){
+            sendString(send_str, 100);
         }
-        if (motors == 1) {
-            buf[0] = 0x02;
-            buf[1] = 0;
-            buf[2] = 0;
-            pins.i2cWriteBuffer(0x10, buf);
-        }
-
-        if (motors == 2) {
-            buf[0] = 0x00;
-            buf[1] = 0;
-            buf[2] = 0;
-            pins.i2cWriteBuffer(0x10, buf);
-            buf[0] = 0x02;
-            pins.i2cWriteBuffer(0x10, buf);
-        }
-
+        nano_reply = false
     }
 
     /**
