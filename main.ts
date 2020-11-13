@@ -93,7 +93,7 @@ namespace FabBots {
         let send_str: string = ""
         send_str = "UL"
         while(!ul_reply){
-            sendString(send_str, 50);
+            sendString(send_str, 200);
         }
         return uldistance;
     }
