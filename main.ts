@@ -120,12 +120,12 @@ namespace FabBots {
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=2
     //% subcategory="Motors"
     export function motorRun(index: Motors, direction: Dir, speed: number): void {
+        nano_reply = false
         let send_str: string = ""
         send_str = "MC" + (speed*100 + direction*10 + index).toString()
-        // while(!nano_reply){
-            sendString(send_str, 0);
-        // }
-        //nano_reply = false
+        while(!nano_reply){
+            sendString(send_str, 10);
+        }
     }
 
     /**
