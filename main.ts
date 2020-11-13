@@ -259,7 +259,8 @@ namespace FabBots {
             motor_reply = true
         }
         if (serial_str.includes("UL")) {
-            uldistance = parseFloat(serial_str)
+            let temp = serial_str.substr(2)
+            uldistance = parseFloat(temp)
             ul_reply = true
         }
     })
