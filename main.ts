@@ -123,7 +123,7 @@ namespace FabBots {
         let send_str: string = ""
         send_str = "MC" + (speed*100 + direction*10 + index).toString()
         while(!nano_reply){
-            sendString(send_str, 50);
+            sendString(send_str, 200);
         }
         nano_reply = false
     }
@@ -139,7 +139,7 @@ namespace FabBots {
         let send_str: string = ""
         send_str = "MC" + (0*100 + 1*10 + index).toString()
         while(!nano_reply){
-            sendString(send_str, 100);
+            sendString(send_str, 200);
         }
         nano_reply = false
     }
