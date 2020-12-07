@@ -29,6 +29,8 @@ enum Dir {
 enum PingUnit {
     //% block="cm"
     Centimeters,
+    //% block="m"
+    Meters,
 }
 /**
  * MakeCode extension for ESP8266 Wifi modules and MQTT
