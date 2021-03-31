@@ -91,13 +91,30 @@ namespace FabBots {
     //% weight=95
     //% subcategory="Sensors"
     export function Ultrasonic(unit: PingUnit, maxCmDistance = 500): number {
-        ul_reply = false
-        let send_str: string = ""
-        send_str = "UL"
-        while(!ul_reply){
-            sendString(send_str, 200);
+        let d
+        pins.digitalWritePin(DigitalPin.P15, 1);
+        basic.pause(1)
+        pins.digitalWritePin(DigitalPin.P15, 0);
+        if (pins.digitalReadPin(DigitalPin.P2) == 0) {
+            pins.digitalWritePin(DigitalPin.P15, 0);
+            //sleep_us(2);
+            pins.digitalWritePin(DigitalPin.P15, 1);
+            //sleep_us(10);
+            pins.digitalWritePin(DigitalPin.P15, 0);
+            d = pins.pulseIn(DigitalPin.P2, PulseValue.High, maxCmDistance * 58);//readPulseIn(1);
+        } else {
+            pins.digitalWritePin(DigitalPin.P1, 0);
+            pins.digitalWritePin(DigitalPin.P1, 1);
+            d = pins.pulseIn(DigitalPin.P2, PulseValue.Low, maxCmDistance * 58);//readPulseIn(0);
         }
-        return uldistance;
+        let x = d / 39;
+        if (x <= 0 || x > 500) {
+            return 0;
+        }
+        switch (unit) {
+            case PingUnit.Centimeters: return Math.round(x);
+            default: return Math.idiv(d, 2.54);
+        }
     }
 
     /**
