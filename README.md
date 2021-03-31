@@ -23,7 +23,7 @@ To edit this repository in MakeCode.
 This image shows the blocks code from the last commit in master.
 This image may take a few minutes to refresh.
 
-![A rendered view of the blocks](https://github.com/khoapmd/fabbots/raw/master/.github/makecode/blocks.png)
+![A rendered view of the blocks](https://raw.githubusercontent.com/khoapmd/fabbots/master/makeblocks.png)
 
 #### Metadata (used for search, rendering)
 
