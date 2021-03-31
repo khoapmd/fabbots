@@ -103,8 +103,8 @@ namespace FabBots {
             pins.digitalWritePin(DigitalPin.P15, 0);
             d = pins.pulseIn(DigitalPin.P2, PulseValue.High, maxCmDistance * 58);//readPulseIn(1);
         } else {
-            pins.digitalWritePin(DigitalPin.P1, 0);
-            pins.digitalWritePin(DigitalPin.P1, 1);
+            pins.digitalWritePin(DigitalPin.P15, 0);
+            pins.digitalWritePin(DigitalPin.P15, 1);
             d = pins.pulseIn(DigitalPin.P2, PulseValue.Low, maxCmDistance * 58);//readPulseIn(0);
         }
         let x = d / 39;
