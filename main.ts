@@ -90,30 +90,28 @@ namespace FabBots {
     //% blockId=ultrasonic_sensor block="Read ultrasonic sensor |%unit "
     //% weight=95
     //% subcategory="Sensors"
-    export function Ultrasonic(unit: PingUnit, maxCmDistance = 500): number {
-        let d
-        pins.digitalWritePin(DigitalPin.P15, 1);
-        basic.pause(1)
-        pins.digitalWritePin(DigitalPin.P15, 0);
-        if (pins.digitalReadPin(DigitalPin.P2) == 0) {
-            pins.digitalWritePin(DigitalPin.P15, 0);
-            //sleep_us(2);
-            pins.digitalWritePin(DigitalPin.P15, 1);
-            //sleep_us(10);
-            pins.digitalWritePin(DigitalPin.P15, 0);
-            d = pins.pulseIn(DigitalPin.P2, PulseValue.High, maxCmDistance * 58);//readPulseIn(1);
-        } else {
-            pins.digitalWritePin(DigitalPin.P15, 0);
-            pins.digitalWritePin(DigitalPin.P15, 1);
-            d = pins.pulseIn(DigitalPin.P2, PulseValue.Low, maxCmDistance * 58);//readPulseIn(0);
+    export function Ultrasonic(unit: PingUnit): number {
+        let trig = DigitalPin.P15;
+        let echo = DigitalPin.P2;
+        let maxCmDistance = 500;
+        let d=10;
+        pins.setPull(trig, PinPullMode.PullNone);
+        for (let x=0; x<10; x++)
+        {
+            pins.digitalWritePin(trig, 0);
+            control.waitMicros(2);
+            pins.digitalWritePin(trig, 1);
+            control.waitMicros(10);
+            pins.digitalWritePin(trig, 0);
+            // read pulse
+            d = pins.pulseIn(echo, PulseValue.High, maxCmDistance * 58);
+            if (d>0)
+                break;
         }
-        let x = d / 39;
-        if (x <= 0 || x > 500) {
-            return 0;
-        }
-        switch (unit) {
-            case PingUnit.Centimeters: return Math.round(x);
-            default: return Math.idiv(d, 2.54);
+        switch (unit)
+        {
+            case PingUnit.Centimeters: return Math.round(d / 58);
+            default: return d;
         }
     }
 
