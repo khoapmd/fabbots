@@ -64,11 +64,11 @@ namespace FabBots {
         serial.redirect(
             SerialPin.P0,
             SerialPin.P1,
-            BaudRate.BaudRate9600
+            BaudRate.BaudRate115200
         )
       let sendText = "Init" 
       while(!init_successful){
-          sendString(sendText, 500) // wait response from Nano
+          sendString(sendText, 500) // wait response from ESP
       }
     }
 
