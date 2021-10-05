@@ -312,6 +312,17 @@ namespace FabBots {
     }
 
     /**
+     * Custom connect to MQTT Broker.
+     */
+    //% help=mqtt/custom-connect
+    //% weight=60
+    //% blockId=mqtt_connect_custom block="Connect to host %host port %port|1883"
+    //% subcategory="MQTT"
+    export function cusConnect(host: string, port: number, qos: QoS) {
+
+    }
+
+    /**
     * Check if Receiv Message from MQTT Broker
     */
     //% block="Message Received ?"
