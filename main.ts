@@ -32,6 +32,15 @@ enum PingUnit {
     //% block="m"
     Meters,
 }
+
+enum QoS {
+    //% block="1"
+    Qos1 = 1,
+    //% block="2"
+    Qos2 = 2,
+    //% block="3"
+    Qos3 = 3,
+}
 /**
  * MakeCode extension for ESP8266 Wifi modules and MQTT
  */
@@ -278,6 +287,18 @@ namespace FabBots {
         while (!mqtt_controller) {
             sendString(sendText, 2000)
         }
+    }
+
+
+    /**
+     * Subcribe to MQTT Topic.
+     */
+    //% help=mqtt/sub-topic
+    //% weight=60
+    //% blockId=mqtt_sub_send block="radio subcribe to topic %topic and %qos" blockGap=8
+    //% subcategory="MQTT"
+    export function sendNumber(topic: string, qos: QoS) {
+ 
     }
 
 ///////////////////////////////////////////////////////////////////////////////
