@@ -303,9 +303,9 @@ namespace FabBots {
     /**
      * Public message to MQTT Topic.
      */
-    //% help=mqtt/sub-topic
+    //% help=mqtt/pub-topic
     //% weight=60
-    //% blockId=mqtt_sub_send block="Pubish message %mess to topic %topic with QoS %qos"
+    //% blockId=mqtt_pub_send block="Pubish message %mess to topic %topic with QoS %qos"
     //% subcategory="MQTT"
     export function pubTopic(topic: string, mess: string, qos: QoS) {
 
