@@ -295,10 +295,20 @@ namespace FabBots {
      */
     //% help=mqtt/sub-topic
     //% weight=60
-    //% blockId=mqtt_sub_send block="radio subcribe to topic %topic and %qos" blockGap=8
+    //% blockId=mqtt_sub_send block="Subcribe to topic %topic with QoS %qos"
     //% subcategory="MQTT"
-    export function sendNumber(topic: string, qos: QoS) {
+    export function subTopic(topic: string, qos: QoS) {
  
+    }
+    /**
+     * Public message to MQTT Topic.
+     */
+    //% help=mqtt/sub-topic
+    //% weight=60
+    //% blockId=mqtt_sub_send block="Pubish message %mess to topic %topic with QoS %qos"
+    //% subcategory="MQTT"
+    export function pubTopic(topic: string, mess: string, qos: QoS) {
+
     }
 
 ///////////////////////////////////////////////////////////////////////////////
