@@ -316,7 +316,7 @@ namespace FabBots {
      */
     //% help=mqtt/custom-connect
     //% weight=60
-    //% blockId=mqtt_connect_custom block="Connect to host %host port %port|1883"
+    //% blockId=mqtt_connect_custom block="Connect to host %host port %port username(optional) %user password(optional) %pass"
     //% subcategory="MQTT"
     export function cusConnect(host: string, port: number, qos: QoS) {
 
