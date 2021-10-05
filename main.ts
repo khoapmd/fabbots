@@ -38,6 +38,8 @@ enum PingUnit {
 //% color=#009b5b icon="\uf1eb" block="FabBots"
 namespace FabBots {
     let init_successful: boolean = false
+    let mqtt_connected: boolean = false
+    let mqtt_controller: boolean = false
     let blynk_connected: boolean = false
     let blynk_controller: boolean = false
     let microbit_controller: boolean = false
@@ -254,12 +256,30 @@ namespace FabBots {
     }
 
     /**
-    * Manual control FabBots from Blynk
+    * Check if ESP8266 successfully connected to Wifi
+    */
+    //% block="MQTT connected ?"
+    //% subcategory="MQTT"
+    export function isMQTTConnected() {
+        while (!mqtt_connected) {
+            sendString("MQTT", 2000)
+        }
+        return mqtt_connected
+    }
+
+    /**
+    * Manual control FabBots from MQTT
     * @param text the text to scroll on the screen, eg: "fabtopic!"
     */
-    //% block="Control FabBots from Blynk"
+    //% block="Control FabBots from MQT"
     //% subcategory="MQTT"
-    
+    export function controlformMQTT() {
+        let sendText = "CFMQTT"
+        while (!mqtt_controller) {
+            sendString(sendText, 2000)
+        }
+    }
+
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////READ SERIAL/////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
